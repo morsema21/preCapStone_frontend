@@ -35,3 +35,4 @@ const registerSlice = createSlice({
 export default registerSlice.reducer;
 
 export const { useRegisterMutation } = registerApi;
+
