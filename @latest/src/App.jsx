@@ -11,12 +11,10 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Login />}></Route>
-          <Route path="/register" element={<Registration />}></Route>
-          <Route path="/home" element={<Protected />}>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Registration />} />
+          <Route element={<Protected />}>
             <Route path="/home" element={<Home />} />
-          </Route>
-          <Route path="/update" element={<Protected />}>
             <Route path="/update" element={<Update />} />
           </Route>
         </Routes>

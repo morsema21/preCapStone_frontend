@@ -29,7 +29,7 @@ const Login = ({ token, setToken }) => {
   return (
     <div id="login-container">
       <h2>Login</h2>
-      <form onsubmit={handleSubmit} id="login-form">
+      <form onSubmit={handleSubmit} id="login-form">
         <label>
           Email: <input name="email" type="email" onChange={handleChange} />
         </label>

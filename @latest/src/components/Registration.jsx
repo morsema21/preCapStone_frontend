@@ -38,7 +38,7 @@ export default function Register() {
           <label>First Name</label>
           <input
             name="firstName"
-            value={form.firstname}
+            value={form.firstName}
             onChange={update}
             type="text"
             className="form-control"
@@ -48,8 +48,8 @@ export default function Register() {
         <div className="form-group">
           <label>Last Name</label>
           <input
-            name="LastName"
-            value={form.lastname}
+            name="lastName"
+            value={form.lastName}
             onChange={update}
             type="text"
             className="form-control"

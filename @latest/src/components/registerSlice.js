@@ -18,7 +18,7 @@ const registerSlice = createSlice({
   name: "register",
   initialState: {
     user: {},
-    token: null,
+    token: window.sessionStorage.getItem("Token") || null,
   },
   reducers: {},
   extraReducers: (builder) => {
