@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { api } from "../app/api";
 
+//TODO combine userSlice with User for get Users function
+
 const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query({

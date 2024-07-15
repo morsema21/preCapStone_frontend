@@ -4,6 +4,7 @@ import axios from "axios";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
+    //TODO check with aaron about url
     baseUrl: "https://http://localhost:3000",
     prepareHeaders: (headers, { getState }) => {
       const token = getState().register.token || getState().login.token;

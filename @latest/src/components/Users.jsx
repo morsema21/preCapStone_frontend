@@ -11,12 +11,14 @@ export default function Users() {
     }
   }, [isSuccess]);
 
-  return (
-    <div>
-      {isSuccess &&
-        users.map((user) => {
-          return <p key={user.id}>{user.email}</p>;
-        })}
-    </div>
-  );
+  //TODO finish get users function and export to home
+
+  // return (
+  //   <div>
+  //     {isSuccess &&
+  //       users.map((user) => {
+  //         return <p key={user.id}>{user.email}</p>;
+  //       })}
+  //   </div>
+  // );
 }
