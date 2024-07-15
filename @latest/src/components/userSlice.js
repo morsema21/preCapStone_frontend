@@ -11,6 +11,34 @@ const userApi = api.injectEndpoints({
       }),
       providesTags: ["User"],
     }),
+    deleteUser: builder.mutation({
+      query: ({ token, id }) => ({
+        url: `/api/user/users/${id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        method: "DELETE",
+      }),
+      invalidatesTags: ["User"],
+    }),
+    updateUser: builder.mutation({
+      query: ({ token, id }) => ({
+        url: `/api/user/users/${id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        method: "PATCH",
+        body: {
+          firstName: "",
+          LastName: "",
+          email: "",
+          password: "",
+        },
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -30,4 +58,4 @@ const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { useGetUsersQuery } = userApi;
+export const { useGetUsersQuery, useDeleteUserMutation, useUpdateUserMutation } = userApi;

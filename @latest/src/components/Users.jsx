@@ -1,4 +1,4 @@
-import { useGetUsersQuery } from "./userSlice";
+import { useGetUsersQuery, useDeleteUserMutation, useUpdateUserMutation } from "./userSlice";
 import { useEffect, useState } from "react";
 
 export default function Users() {
