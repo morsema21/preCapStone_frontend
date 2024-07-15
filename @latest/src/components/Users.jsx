@@ -11,14 +11,24 @@ export default function Users() {
     }
   }, [isSuccess]);
 
-  //TODO finish get users function and export to home
+  const handleDelete = (userId) => {
+    //TODO delete user function
+    deleteUser(userId);
+  };
 
-  // return (
-  //   <div>
-  //     {isSuccess &&
-  //       users.map((user) => {
-  //         return <p key={user.id}>{user.email}</p>;
-  //       })}
-  //   </div>
-  // );
+  const handleUpdate = (userId) => {
+    updateUser(userId);
+    //TODO update user function
+  };
+
+  return (
+    <div>
+      {isSuccess &&
+        users.map((user) => {
+          return <p key={user.id}>{user.email}</p>;
+        })}
+      <button onClick={() => handleDelete(user.id)}>Delete</button>
+      <button onClick={() => handleUpdate(user.id)}>Update</button>
+    </div>
+  );
 }
