@@ -6,16 +6,13 @@ const Login = ({ token, setToken }) => {
     email: "",
     password: "",
   });
-
   const [login] = useLoginMutation();
-
   const handleChange = (e) => {
     setInputFields((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -29,7 +26,6 @@ const Login = ({ token, setToken }) => {
         "Please complete all fields";
     }
   };
-
   return (
     <div id="login-container">
       <h2>Login</h2>
@@ -41,10 +37,11 @@ const Login = ({ token, setToken }) => {
           Password:{" "}
           <input name="password" type="password" onChange={handleChange} />
         </label>
-
         <button type="submit">Login</button>
         <h3 id="successful"></h3>
       </form>
     </div>
   );
 };
+
+export default Login;

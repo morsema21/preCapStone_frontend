@@ -12,14 +12,12 @@ export default function Register() {
     email: "",
     password: "",
   });
-
   const update = (e) => {
     setForm((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
-
   const submit = async (e) => {
     e.preventDefault();
     try {
@@ -39,7 +37,7 @@ export default function Register() {
         <div className="form-group">
           <label>First Name</label>
           <input
-            name="firstname"
+            name="firstName"
             value={form.firstname}
             onChange={update}
             type="text"
@@ -50,7 +48,7 @@ export default function Register() {
         <div className="form-group">
           <label>Last Name</label>
           <input
-            name="lastname"
+            name="LastName"
             value={form.lastname}
             onChange={update}
             type="text"
@@ -58,7 +56,6 @@ export default function Register() {
             placeholder="Last Name"
           />
         </div>
-
         <div className="form-group">
           <label>Email address</label>
           <input
