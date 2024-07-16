@@ -1,14 +1,12 @@
-import {
-  useGetUsersQuery,
-  useDeleteUserMutation,
-  useUpdateUserMutation,
-} from "./userSlice";
+import { useGetUsersQuery, useDeleteUserMutation } from "./userSlice";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Users() {
+  const token = window.sessionStorage.getItem("Token");
   const [users, getUser] = useState([]);
-  const { data, isSuccess } = useGetUsersQuery();
+  const { data, isSuccess } = useGetUsersQuery(token);
   const navigate = useNavigate();
   const [deleteUser] = useDeleteUserMutation();
 

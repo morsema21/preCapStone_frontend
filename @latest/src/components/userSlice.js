@@ -1,15 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { api } from "../app/api";
+import { useSelector } from "react-redux";
+
+// const token = useSelector((state) => state.register.token || state.login.token);
+// const sessionToken = window.sessionStorage.getItem("Token");
 
 const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query({
-      query: () => ({
+      query: (token) => ({
         url: "/api/user/users",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         method: "GET",
+        // responseHandler: (response) => response.text(),
       }),
-      providesTags: ["User"],
+      // providesTags: ["User"],
     }),
+
+    // delete user
     deleteUser: builder.mutation({
       query: ({ token, id }) => ({
         url: `/api/user/users/${id}`,
@@ -18,9 +29,12 @@ const userApi = api.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
         method: "DELETE",
+        responseHandler: (response) => response.text(),
       }),
       invalidatesTags: ["User"],
     }),
+
+    // update user
     updateUser: builder.mutation({
       query: ({ token, id }) => ({
         url: `/api/user/users/${id}`,
@@ -35,6 +49,7 @@ const userApi = api.injectEndpoints({
           email: "",
           password: "",
         },
+        responseHandler: (response) => response.text(),
       }),
       invalidatesTags: ["User"],
     }),
