@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export default function Users() {
+export default function Home() {
   const token = window.sessionStorage.getItem("Token");
+  console.log(token);
   const [users, getUser] = useState([]);
   const { data, isSuccess } = useGetUsersQuery(token);
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function Users() {
 
   useEffect(() => {
     if (isSuccess) {
-      getUser(JSON.parse(data));
+      getUser(data);
     }
   }, [isSuccess]);
 

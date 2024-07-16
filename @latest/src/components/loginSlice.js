@@ -19,8 +19,9 @@ const loginApi = api.injectEndpoints({
 });
 
 function storeToken(state, { payload }) {
-  state.token = payload.token;
-  window.sessionStorage.setItem(TOKEN, payload.token);
+  const temp = JSON.parse(payload);
+  state.token = temp.token;
+  window.sessionStorage.setItem(TOKEN, temp.token);
 }
 
 const loginSlice = createSlice({
@@ -30,7 +31,7 @@ const loginSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addMatcher(loginApi.endpoints.login.matchFulfilled, storeToken);
+    builder.addMatcher(api.endpoints.login.matchFulfilled, storeToken);
   },
 });
 
