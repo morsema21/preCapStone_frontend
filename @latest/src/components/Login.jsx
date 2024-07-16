@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react";
 import { useLoginMutation } from "./loginSlice";
 
-const Login = ({ token, setToken }) => {
+const Login = () => {
   const [inputFields, setInputFields] = useState({
     email: "",
     password: "",
   });
   const [login] = useLoginMutation();
+
   const handleChange = (e) => {
     setInputFields((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       let success = await login(inputFields).unwrap();
-      setToken(success.token);
       document.getElementById("login-form").reset();
       document.getElementById("successful").innerText = success.message;
     } catch (error) {
@@ -26,6 +27,7 @@ const Login = ({ token, setToken }) => {
         "Please complete all fields";
     }
   };
+
   return (
     <div id="login-container">
       <h2>Login</h2>

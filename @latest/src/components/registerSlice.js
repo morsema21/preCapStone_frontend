@@ -8,6 +8,7 @@ const registerApi = api.injectEndpoints({
         url: "/api/user/register",
         method: "POST",
         body: credentials,
+        responseHandler: (response) => response.text(),
       }),
       invalidateTags: ["User"],
     }),
@@ -18,7 +19,7 @@ const registerSlice = createSlice({
   name: "register",
   initialState: {
     user: {},
-    token: window.sessionStorage.getItem("Token") || null,
+    token: null,
   },
   reducers: {},
   extraReducers: (builder) => {

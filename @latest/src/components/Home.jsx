@@ -27,8 +27,15 @@ export default function Users() {
         users.map((user) => {
           return <p key={user.id}>{user.email}</p>;
         })}
-      <button onClick={() => handleDelete(users.id)}>Delete</button>
-      <button onClick={() => navigate("/api/user/users/:id")}>Update</button>
+      <button onClick={() => handleDelete(users.id)} className="btn btn-danger">
+        Delete
+      </button>
+      <button
+        onClick={() => navigate("/api/user/users/:id")}
+        className="btn btn-danger"
+      >
+        Update
+      </button>
     </div>
   );
 }

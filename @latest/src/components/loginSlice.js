@@ -2,7 +2,7 @@ import { useState } from "react";
 import { api } from "../app/api";
 import { createSlice } from "@reduxjs/toolkit";
 
-const TOKEN = "token";
+const TOKEN = "Token";
 
 const loginApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,6 +11,7 @@ const loginApi = api.injectEndpoints({
         url: "/api/user/login",
         method: "POST",
         body: credentials,
+        responseHandler: (response) => response.text(),
       }),
     }),
   }),

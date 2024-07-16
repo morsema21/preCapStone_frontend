@@ -8,29 +8,33 @@ export default function Register() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     firstName: "",
-    lastName: "",
+    LastName: "",
     email: "",
     password: "",
   });
+
   const update = (e) => {
     setForm((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
+
   const submit = async (e) => {
     e.preventDefault();
     try {
       let success = false;
       success = await registerUser(form).unwrap();
+      console.log("test:", success);
       if (success) {
         navigate("/home");
         console.log(success.token);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error, "hello");
     }
   };
+
   return (
     <div>
       <form onSubmit={submit}>
@@ -48,8 +52,8 @@ export default function Register() {
         <div className="form-group">
           <label>Last Name</label>
           <input
-            name="lastName"
-            value={form.lastName}
+            name="LastName"
+            value={form.LastName}
             onChange={update}
             type="text"
             className="form-control"
@@ -79,7 +83,7 @@ export default function Register() {
           />
         </div>
         <button type="submit" className="btn btn-primary">
-          Submit
+          Register
         </button>
       </form>
     </div>
