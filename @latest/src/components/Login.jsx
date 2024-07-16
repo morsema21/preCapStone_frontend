@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLoginMutation } from "./loginSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [inputFields, setInputFields] = useState({
@@ -14,13 +15,18 @@ const Login = () => {
       [e.target.name]: e.target.value,
     }));
   };
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       let success = await login(inputFields).unwrap();
-      document.getElementById("login-form").reset();
-      document.getElementById("successful").innerText = success.message;
+      if (success) {
+        navigate("/home");
+        console.log(success.token);
+      }
+      // document.getElementById("login-form").reset();
+      // document.getElementById("successful").innerText = success.message;
     } catch (error) {
       console.log(error);
       document.getElementById("successful").innerText =

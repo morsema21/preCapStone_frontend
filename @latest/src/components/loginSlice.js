@@ -13,6 +13,7 @@ const loginApi = api.injectEndpoints({
         body: credentials,
         responseHandler: (response) => response.text(),
       }),
+      invalidateTags: ["User"],
     }),
   }),
 });
@@ -29,7 +30,7 @@ const loginSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addMatcher(api.endpoints.login.matchFulfilled, storeToken);
+    builder.addMatcher(loginApi.endpoints.login.matchFulfilled, storeToken);
   },
 });
 
