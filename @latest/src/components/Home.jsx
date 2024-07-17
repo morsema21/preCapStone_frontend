@@ -19,8 +19,9 @@ export default function Home() {
   const handleDelete = async (event, id) => {
     event.preventDefault();
     try {
-      const response = await deleteUser(token, id);
-      console.log(response);
+      console.log(id);
+      const response = await deleteUser({ token, id });
+      getUser((users) => users.filter((user) => user.id !== id));
     } catch (error) {
       console.log("Delete error");
     }
@@ -34,7 +35,7 @@ export default function Home() {
             <p key={user.id}>
               {user.email}{" "}
               <button
-                onClick={(event) => handleDelete(event, users.id)}
+                onClick={(event) => handleDelete(event, user.id)}
                 className="btn btn-danger"
               >
                 Delete

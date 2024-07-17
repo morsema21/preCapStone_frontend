@@ -6,6 +6,8 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     // baseUrl: "https://precapstone-backend.onrender.com",
     baseUrl: "http://localhost:3000",
+    tagTypes: ["User"],
+
     prepareHeaders: (headers, { getState }) => {
       const token = getState().register.token || getState().login.token;
       const sessionToken = window.sessionStorage.getItem("Token", token);
@@ -14,6 +16,5 @@ export const api = createApi({
       }
     },
   }),
-  tagTypes: ["User"],
   endpoints: () => ({}),
 });

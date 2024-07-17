@@ -17,7 +17,7 @@ const userApi = api.injectEndpoints({
         method: "GET",
         // responseHandler: (response) => response.text(),
       }),
-      // providesTags: ["User"],
+      providesTags: ["User"],
     }),
 
     // delete user
