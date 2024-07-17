@@ -1,14 +1,18 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useUpdateUserMutation } from "./userSlice";
+import { useParams, useNavigate } from "react-router-dom";
+import { useUpdateUserMutation, useGetUserQuery } from "./userSlice";
 
 export default function UpdateUser() {
+  const { id } = useParams();
+  const token = window.sessionStorage.getItem("Token");
+  const { data = {}, error, isLoading } = useGetUserQuery({ token, id });
+  
   const [updateUser] = useUpdateUserMutation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [form, setForm] = useState({
     firstName: "",
-    lastName: "",
+    LastName: "",
     email: "",
     password: "",
   });
@@ -18,22 +22,35 @@ export default function UpdateUser() {
       [e.target.name]: e.target.value,
     }));
   };
-  const submit = async (e) => {
-    e.preventDefault();
+  // const submit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await updateUser({}).unwrap();
+  //     if (response) {
+  //       navigate("/api/user/users");
+  //       console.log(response);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const handleUser = async (event) => {
+    event.preventDefault();
     try {
-      let success = false;
-      success = await updateUser(form).unwrap();
-      if (success) {
-        navigate("/api/user/users");
-        console.log(success.token);
-      }
+      // console.log(id);
+      const response = await updateUser({ token, id, form });
+      // console.log(response);
     } catch (error) {
-      console.log(error);
+      console.log("Update error");
     }
   };
+
   return (
     <div>
-      <form onSubmit={submit}>
+      <h1>Update user</h1>
+      {/* {console.log(id)} */}
+      <form onSubmit={handleUser}>
         <div className="form-group">
           <label>First Name</label>
           <input
@@ -48,8 +65,8 @@ export default function UpdateUser() {
         <div className="form-group">
           <label>Last Name</label>
           <input
-            name="lastName"
-            value={form.lastName}
+            name="LastName"
+            value={form.LastName}
             onChange={update}
             type="text"
             className="form-control"

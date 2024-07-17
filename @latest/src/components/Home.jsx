@@ -1,4 +1,8 @@
-import { useGetUsersQuery, useDeleteUserMutation } from "./userSlice";
+import {
+  useGetUsersQuery,
+  useDeleteUserMutation,
+  useUpdateUserMutation,
+} from "./userSlice";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -9,6 +13,7 @@ export default function Home() {
   const { data, isSuccess } = useGetUsersQuery(token);
   const navigate = useNavigate();
   const [deleteUser] = useDeleteUserMutation();
+  const [updateUser] = useUpdateUserMutation();
 
   useEffect(() => {
     if (isSuccess) {
@@ -27,6 +32,17 @@ export default function Home() {
     }
   };
 
+  // const handleUser = async (event, id) => {
+  //   event.preventDefault();
+  //   try {
+  //     console.log(id);
+  //     const response = await updateUser({ token, id, form });
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.log("Update error");
+  //   }
+  // };
+
   return (
     <div>
       {isSuccess &&
@@ -41,7 +57,8 @@ export default function Home() {
                 Delete
               </button>
               <button
-                onClick={() => navigate("/api/user/users/:id")}
+                onClick={() => navigate(`/update/${user.id}`)}
+                // onClick={(event) => handleUser(event, user.id)}
                 className="btn btn-danger"
               >
                 Update

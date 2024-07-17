@@ -36,7 +36,7 @@ const userApi = api.injectEndpoints({
 
     // update user
     updateUser: builder.mutation({
-      query: ({ token, id }) => ({
+      query: ({ token, id, form }) => ({
         url: `/api/user/users/${id}`,
         headers: {
           "Content-Type": "application/json",
@@ -44,14 +44,27 @@ const userApi = api.injectEndpoints({
         },
         method: "PATCH",
         body: {
-          firstName: "",
-          LastName: "",
-          email: "",
-          password: "",
+          firstName: form.firstName,
+          LastName: form.LastName,
+          email: form.email,
+          password: form.password,
         },
         responseHandler: (response) => response.text(),
       }),
       invalidatesTags: ["User"],
+    }),
+
+    getUser: builder.query({
+      query: ({ token, id }) => ({
+        url: `/api/user/users/${id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        method: "GET",
+        // responseHandler: (response) => response.text(),
+      }),
+      providesTags: ["User"],
     }),
   }),
 });
@@ -76,4 +89,5 @@ export const {
   useGetUsersQuery,
   useDeleteUserMutation,
   useUpdateUserMutation,
+  useGetUserQuery
 } = userApi;

@@ -18,7 +18,7 @@ function App() {
           <Route path="/register" element={<Registration />} />
           <Route element={<Protected />}>
             <Route path="/home" element={<Home token={token}/>} />
-            <Route path="/update" element={<Update />} />
+            <Route path="/update/:id" element={<Update />} />
           </Route>
         </Routes>
       </Router>
