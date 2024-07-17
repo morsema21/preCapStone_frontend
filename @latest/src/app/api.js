@@ -4,7 +4,8 @@ import axios from "axios";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://precapstone-backend.onrender.com",
+    // baseUrl: "https://precapstone-backend.onrender.com",
+    baseUrl: "http://localhost:3000",
     prepareHeaders: (headers, { getState }) => {
       const token = getState().register.token || getState().login.token;
       const sessionToken = window.sessionStorage.getItem("Token", token);
