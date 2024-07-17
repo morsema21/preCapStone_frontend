@@ -42,7 +42,7 @@ const userApi = api.injectEndpoints({
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        method: "PATCH",
+        method: "PUT",
         body: {
           firstName: form.firstName,
           LastName: form.LastName,
@@ -89,5 +89,5 @@ export const {
   useGetUsersQuery,
   useDeleteUserMutation,
   useUpdateUserMutation,
-  useGetUserQuery
+  useGetUserQuery,
 } = userApi;

@@ -23,7 +23,7 @@ const Login = () => {
       let success = await login(inputFields).unwrap();
       if (success) {
         navigate("/home");
-        console.log(success.token);
+        console.log(success);
       }
       // document.getElementById("login-form").reset();
       // document.getElementById("successful").innerText = success.message;

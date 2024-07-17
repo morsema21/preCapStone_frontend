@@ -6,8 +6,8 @@ import { useUpdateUserMutation, useGetUserQuery } from "./userSlice";
 export default function UpdateUser() {
   const { id } = useParams();
   const token = window.sessionStorage.getItem("Token");
-  const { data = {}, error, isLoading } = useGetUserQuery({ token, id });
-  
+  // const { data = {}, error, isLoading } = useGetUserQuery({ token, id });
+
   const [updateUser] = useUpdateUserMutation();
   // const navigate = useNavigate();
   const [form, setForm] = useState({

@@ -28,7 +28,7 @@ export default function Register() {
       console.log("test:", success);
       if (success) {
         navigate("/home");
-        console.log(success.token);
+        console.log(success);
       }
     } catch (error) {
       console.log(error, "hello");
