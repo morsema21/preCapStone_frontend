@@ -43,12 +43,8 @@ const userApi = api.injectEndpoints({
     }),
 
     getUser: builder.query({
-      query: ({ token, id }) => ({
+      query: ({ id }) => ({
         url: `/api/user/users/${id}`,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
         method: "GET",
         // responseHandler: (response) => response.text(),
       }),

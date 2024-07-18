@@ -8,15 +8,18 @@ import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [token, setToken] = useState(null);
+  const [email, setEmail] = useState();
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Registration />} />
+          <Route path="/" element={<Login setEmail={setEmail} />} />
+          <Route
+            path="/register"
+            element={<Registration setEmail={setEmail} />}
+          />
           <Route element={<Protected />}>
-            <Route path="/home" element={<Home token={token} />} />
+            <Route path="/home" element={<Home email={email} />} />
             <Route path="/update/:id" element={<UpdateUser />} />
           </Route>
         </Routes>

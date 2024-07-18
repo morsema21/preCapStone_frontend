@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useLoginMutation } from "./loginSlice";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setEmail }) => {
   const [inputFields, setInputFields] = useState({
     email: "",
     password: "",
   });
+  // const [userId, setUserId] = useState();
   const [login] = useLoginMutation();
 
   const handleChange = (e) => {
@@ -21,9 +22,13 @@ const Login = () => {
     event.preventDefault();
     try {
       let success = await login(inputFields).unwrap();
+      const successJson = JSON.parse(success);
+      console.log("test:", successJson.token);
       if (success) {
-        navigate("/home");
-        console.log(success);
+        // setUserId(success)
+        setEmail(successJson.token.email);
+        navigate(`/home`);
+        console.log(successJson.token.email);
       }
       // document.getElementById("login-form").reset();
       // document.getElementById("successful").innerText = success.message;
