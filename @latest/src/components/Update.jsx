@@ -1,50 +1,48 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useUpdateUserMutation, useGetUserQuery } from "./userSlice";
 
 export default function UpdateUser() {
   const { id } = useParams();
   const token = window.sessionStorage.getItem("Token");
-  // const { data = {}, error, isLoading } = useGetUserQuery({ token, id });
-
-  const [updateUser] = useUpdateUserMutation();
   const navigate = useNavigate();
+  const { data: user } = useGetUserQuery({ token, id });
+  const [updateUser] = useUpdateUserMutation();
+
   const [form, setForm] = useState({
     firstName: "",
     LastName: "",
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (user) {
+      setForm({
+        firstName: user.firstName || "",
+        LastName: user.LastName || "",
+        email: user.email || "",
+        password: "",
+      });
+    }
+  }, [user]);
+
   const update = (e) => {
     setForm((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
-  // const submit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await updateUser({}).unwrap();
-  //     if (response) {
-  //       navigate("/api/user/users");
-  //       console.log(response);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const handleUser = async (event) => {
     event.preventDefault();
     try {
-      // console.log(id);
       const response = await updateUser({ token, id, form });
 
       if (response) {
         navigate("/home");
       }
-      // console.log(response);
+
     } catch (error) {
       console.log("Update error");
     }
@@ -52,8 +50,10 @@ export default function UpdateUser() {
 
   return (
     <div>
-      <h1>Update user</h1>
-      {/* {console.log(id)} */}
+      <h1>
+        Update User:{" "}
+        {user ? `${user.firstName} ${user.LastName}` : "Loading..."}
+      </h1>
       <form onSubmit={handleUser}>
         <div className="form-group">
           <label>First Name</label>
