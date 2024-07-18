@@ -19,7 +19,7 @@ export default function Home() {
     if (isSuccess) {
       getUser(data);
     }
-  }, [isSuccess]);
+  }, [data, isSuccess]);
 
   const handleDelete = async (event, id) => {
     event.preventDefault();
@@ -31,17 +31,6 @@ export default function Home() {
       console.log("Delete error");
     }
   };
-
-  // const handleUser = async (event, id) => {
-  //   event.preventDefault();
-  //   try {
-  //     console.log(id);
-  //     const response = await updateUser({ token, id, form });
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log("Update error");
-  //   }
-  // };
 
   return (
     <div>
@@ -58,7 +47,6 @@ export default function Home() {
               </button>
               <button
                 onClick={() => navigate(`/update/${user.id}`)}
-                // onClick={(event) => handleUser(event, user.id)}
                 className="btn btn-danger"
               >
                 Update

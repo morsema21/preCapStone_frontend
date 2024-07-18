@@ -35,9 +35,9 @@ const Login = () => {
   };
 
   return (
-    <div id="login-container">
+    <div id="form-group">
       <h2>Login</h2>
-      <form onSubmit={handleSubmit} id="login-form">
+      <form onSubmit={handleSubmit} id="form-group">
         <label>
           Email: <input name="email" type="email" onChange={handleChange} />
         </label>
