@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "./registerSlice";
 
-export default function Register({ setUserId }) {
+export default function Register({ setEmail }) {
   const [registerUser] = useRegisterMutation();
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -12,7 +12,6 @@ export default function Register({ setUserId }) {
     email: "",
     password: "",
   });
-  
 
   const update = (e) => {
     setForm((prev) => ({
@@ -26,10 +25,12 @@ export default function Register({ setUserId }) {
     try {
       let success = false;
       success = await registerUser(form).unwrap();
-      console.log("test:", success);
+      const successJson = JSON.parse(success);
+      console.log("test:", successJson.token);
       if (success) {
+        setEmail(successJson.token.email);
         navigate("/home");
-        console.log(success);
+        console.log(successJson.token.email);
       }
     } catch (error) {
       console.log(error, "hello");
