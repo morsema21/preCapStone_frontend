@@ -9,7 +9,7 @@ export default function UpdateUser() {
   // const { data = {}, error, isLoading } = useGetUserQuery({ token, id });
 
   const [updateUser] = useUpdateUserMutation();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     firstName: "",
     LastName: "",
@@ -40,6 +40,10 @@ export default function UpdateUser() {
     try {
       // console.log(id);
       const response = await updateUser({ token, id, form });
+
+      if (response) {
+        navigate("/home");
+      }
       // console.log(response);
     } catch (error) {
       console.log("Update error");
