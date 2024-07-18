@@ -8,9 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Home() {
-  const token = window.sessionStorage.getItem("Token");
   const [users, getUser] = useState([]);
-  const { data, isSuccess } = useGetUsersQuery(token);
+  const { data, isSuccess, isLoading } = useGetUsersQuery(
+    {},
+    { refetchOnMountOrArgChange: true }
+  );
   const navigate = useNavigate();
   const [deleteUser] = useDeleteUserMutation();
   const [updateUser] = useUpdateUserMutation();
@@ -21,11 +23,19 @@ export default function Home() {
     }
   }, [data, isSuccess]);
 
+  if (isLoading) {
+    return (
+      <div className="loading">
+        <h2>Loading...</h2>
+      </div>
+    );
+  }
+
   const handleDelete = async (event, id) => {
     event.preventDefault();
     try {
       console.log(id);
-      const response = await deleteUser({ token, id });
+      const response = await deleteUser({ id });
       getUser((users) => users.filter((user) => user.id !== id));
     } catch (error) {
       console.log("Delete error");

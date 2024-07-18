@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useUpdateUserMutation, useGetUserQuery } from "./userSlice";
+import {
+  useUpdateUserMutation,
+  useGetUserQuery,
+  useGetUsersQuery,
+} from "./userSlice";
 
 export default function UpdateUser() {
   const { id } = useParams();
-  const token = window.sessionStorage.getItem("Token");
   const navigate = useNavigate();
-  const { data: user } = useGetUserQuery({ token, id });
+  const { data: user } = useGetUserQuery({ id });
+  const [users, getUser] = useState([]);
+
   const [updateUser] = useUpdateUserMutation();
 
   const [form, setForm] = useState({
@@ -37,12 +42,12 @@ export default function UpdateUser() {
   const handleUser = async (event) => {
     event.preventDefault();
     try {
-      const response = await updateUser({ token, id, form });
-
+      const response = await updateUser({ id, form });
+      console.log(response);
       if (response) {
         navigate("/home");
+        console.log("something");
       }
-
     } catch (error) {
       console.log("Update error");
     }

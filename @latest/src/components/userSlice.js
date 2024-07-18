@@ -8,12 +8,8 @@ import { useSelector } from "react-redux";
 const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query({
-      query: (token) => ({
+      query: () => ({
         url: "/api/user/users",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
         method: "GET",
         // responseHandler: (response) => response.text(),
       }),
@@ -22,12 +18,8 @@ const userApi = api.injectEndpoints({
 
     // delete user
     deleteUser: builder.mutation({
-      query: ({ token, id }) => ({
+      query: ({ id }) => ({
         url: `/api/user/users/${id}`,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
         method: "DELETE",
         responseHandler: (response) => response.text(),
       }),
@@ -36,12 +28,8 @@ const userApi = api.injectEndpoints({
 
     // update user
     updateUser: builder.mutation({
-      query: ({ token, id, form }) => ({
+      query: ({ id, form }) => ({
         url: `/api/user/users/${id}`,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
         method: "PUT",
         body: {
           firstName: form.firstName,
