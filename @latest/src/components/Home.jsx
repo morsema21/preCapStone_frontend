@@ -2,12 +2,14 @@ import {
   useGetUsersQuery,
   useDeleteUserMutation,
   useUpdateUserMutation,
+  useGetUserQuery,
 } from "./userSlice";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export default function Home() {
+export default function Home({ userId }) {
+  // const { userId } = useParams();
   const [users, getUser] = useState([]);
   const { data, isSuccess, isLoading } = useGetUsersQuery(
     {},
@@ -35,8 +37,14 @@ export default function Home() {
     event.preventDefault();
     try {
       console.log(id);
-      const response = await deleteUser({ id });
-      getUser((users) => users.filter((user) => user.id !== id));
+      console.log(userId);
+      console.log()
+      if (userId !== id) {
+        const response = await deleteUser({ id });
+        getUser((users) => users.filter((user) => user.id !== id));
+      } else {
+        return alert("logged in");
+      }
     } catch (error) {
       console.log("Delete error");
     }

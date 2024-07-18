@@ -7,6 +7,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  // const [userId, setUserId] = useState();
   const [login] = useLoginMutation();
 
   const handleChange = (e) => {
@@ -22,7 +23,8 @@ const Login = () => {
     try {
       let success = await login(inputFields).unwrap();
       if (success) {
-        navigate("/home");
+        // setUserId(success)
+        navigate(`/home`);
         console.log(success);
       }
       // document.getElementById("login-form").reset();

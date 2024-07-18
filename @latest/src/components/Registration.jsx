@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "./registerSlice";
 
-export default function Register() {
+export default function Register({ setUserId }) {
   const [registerUser] = useRegisterMutation();
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -12,6 +12,7 @@ export default function Register() {
     email: "",
     password: "",
   });
+  
 
   const update = (e) => {
     setForm((prev) => ({

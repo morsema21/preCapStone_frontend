@@ -19,9 +19,12 @@ const loginApi = api.injectEndpoints({
 });
 
 function storeToken(state, { payload }) {
+  console.log(payload);
+  
   const temp = JSON.parse(payload);
-  state.token = temp.token;
-  window.sessionStorage.setItem(TOKEN, temp.token);
+  console.log(temp.token.email)
+  state.token = temp.token.token;
+  window.sessionStorage.setItem(TOKEN, temp.token.token);
 }
 
 const loginSlice = createSlice({
