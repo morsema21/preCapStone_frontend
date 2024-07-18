@@ -38,9 +38,11 @@ export default function UpdateUser() {
     event.preventDefault();
     try {
       const response = await updateUser({ token, id, form });
+
       if (response) {
         navigate("/home");
       }
+
     } catch (error) {
       console.log("Update error");
     }
