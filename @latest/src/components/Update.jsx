@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {
-  useUpdateUserMutation,
-  useGetUserQuery,
-} from "./userSlice";
+import { useUpdateUserMutation, useGetUserQuery } from "./userSlice";
 
 export default function UpdateUser() {
   const { id } = useParams();
@@ -41,10 +38,8 @@ export default function UpdateUser() {
     event.preventDefault();
     try {
       const response = await updateUser({ id, form });
-      console.log(response);
       if (response) {
         navigate("/home");
-        console.log("something");
       }
     } catch (error) {
       console.log("Update error");
