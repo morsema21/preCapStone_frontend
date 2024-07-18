@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { api } from "../app/api";
-import { useSelector } from "react-redux";
 
 // const token = useSelector((state) => state.register.token || state.login.token);
 // const sessionToken = window.sessionStorage.getItem("Token");

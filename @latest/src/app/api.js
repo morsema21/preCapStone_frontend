@@ -4,8 +4,8 @@ import axios from "axios";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    // baseUrl: "https://precapstone-backend.onrender.com",
-    baseUrl: "http://localhost:3000",
+    baseUrl: "https://precapstone-backend.onrender.com",
+    // baseUrl: "http://localhost:3000",
     tagTypes: ["User"],
 
     prepareHeaders: (headers, { getState }) => {

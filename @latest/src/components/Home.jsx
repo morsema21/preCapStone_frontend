@@ -1,21 +1,17 @@
 import {
   useGetUsersQuery,
   useDeleteUserMutation,
-  useUpdateUserMutation,
-  useGetUserQuery,
 } from "./userSlice";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Home({ email }) {
-  // const { userId } = useParams();
+  
   const [users, getUser] = useState([]);
   const { data, isSuccess, isLoading } = useGetUsersQuery();
-  // const { data: user } = useGetUserQuery();
+  
   const navigate = useNavigate();
   const [deleteUser] = useDeleteUserMutation();
-  const [updateUser] = useUpdateUserMutation();
 
   useEffect(() => {
     if (isSuccess) {
@@ -34,10 +30,6 @@ export default function Home({ email }) {
   const handleDelete = async (event, id, userEmail) => {
     event.preventDefault();
     try {
-      console.log(id);
-      console.log(email);
-      console.log(userEmail);
-      // console.log(user.email);
       if (email !== userEmail) {
         const response = await deleteUser({ id });
         getUser((users) => users.filter((user) => user.id !== id));

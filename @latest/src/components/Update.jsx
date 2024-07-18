@@ -3,14 +3,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   useUpdateUserMutation,
   useGetUserQuery,
-  useGetUsersQuery,
 } from "./userSlice";
 
 export default function UpdateUser() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: user } = useGetUserQuery({ id });
-  const [users, getUser] = useState([]);
 
   const [updateUser] = useUpdateUserMutation();
 

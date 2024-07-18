@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLoginMutation } from "./loginSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -7,7 +7,6 @@ const Login = ({ setEmail }) => {
     email: "",
     password: "",
   });
-  // const [userId, setUserId] = useState();
   const [login] = useLoginMutation();
 
   const handleChange = (e) => {
@@ -23,19 +22,15 @@ const Login = ({ setEmail }) => {
     try {
       let success = await login(inputFields).unwrap();
       const successJson = JSON.parse(success);
-      console.log("test:", successJson.token);
       if (success) {
-        // setUserId(success)
         setEmail(successJson.token.email);
         navigate(`/home`);
-        console.log(successJson.token.email);
       }
-      // document.getElementById("login-form").reset();
-      // document.getElementById("successful").innerText = success.message;
-    } catch (error) {
+      
+    } catch (error) { // add error handling for future
       console.log(error);
       document.getElementById("successful").innerText =
-        "Please complete all fields";
+        "Please complete all fields"; 
     }
   };
 
